@@ -1,0 +1,37 @@
+body {
+    background-color: rgb(79, 129, 194);
+    font-family: 'Playfair Display', serif;
+}
+
+#wrapper {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 15%;
+}
+#articles {
+    font-family: 'Roboto', sans-serif;
+    display: inline-block;
+    overflow: auto;
+    width: 60%;
+    height: 700px;
+}
+#notes {
+    font-family: 'Roboto', sans-serif;
+    float: right;
+    width: 30%;
+}
+textarea, input {
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    width: 100%;
+    background-color: rgb(164, 208, 250);
+}
+input {
+    height: 36px;
+    font-size: 24px;
+}
+textarea {
+    height: 200px;
+    font-size: 18px;
+}
