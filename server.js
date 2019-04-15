@@ -1,4 +1,5 @@
 var express = require("express");
+var logger = require("morgan");
 var mongoose = require("mongoose");
 
 // Our scraping tools
@@ -17,6 +18,8 @@ var app = express();
 
 // Configure middleware
 
+// Use morgan logger for logging requests
+app.use(logger("dev"));
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -28,7 +31,7 @@ app.use(express.static("public"));
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // Routes
 
@@ -39,7 +42,7 @@ app.get("/scrape", function(req, res) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
-    // Now, we grab every h3 within an article tag, and do the following:
+    // Now, we grab every headline, and do the following:
     $("headline").each(function(i, element) {
       // Save an empty result object
       var result = {};
